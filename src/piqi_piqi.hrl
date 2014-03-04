@@ -40,6 +40,7 @@
 -record(piqi_record, {
     name :: name(),
     field = [] :: [field()],
+    piq_positional :: boolean(),
     protobuf_name :: string() | binary(),
     protobuf_custom = [] :: [string() | binary()],
     json_name :: string() | binary(),
@@ -54,6 +55,7 @@
     deprecated = false :: boolean(),
     piq_format :: piq_format(),
     piq_positional :: boolean(),
+    piq_alias :: name(),
     protobuf_name :: string() | binary(),
     code :: integer(),
     protobuf_packed = false :: boolean(),
@@ -83,6 +85,7 @@
     type :: type(),
     deprecated = false :: boolean(),
     piq_format :: piq_format(),
+    piq_alias :: name(),
     protobuf_name :: string() | binary(),
     code :: integer(),
     json_name :: string() | binary(),
