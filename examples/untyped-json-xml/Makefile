@@ -13,7 +13,7 @@ test:
 
 
 dialyzer: all
-	dialyzer deps/piqi/ebin ./ebin
+	dialyzer deps/*/ebin ./ebin
 
 
 clean:
