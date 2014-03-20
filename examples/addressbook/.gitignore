@@ -1,5 +1,6 @@
 /ebin
 /.eunit
+/deps/piqi_bin
 
 # vim
 *.swp

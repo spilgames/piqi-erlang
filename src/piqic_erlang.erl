@@ -217,32 +217,19 @@ get_cwd(_NewCwd) ->
 
 
 find_piqi_executable() ->
-    VsnOld = os:cmd("piqi version"), %% returned by piqi =< 0.6.5
-    VsnNew = os:cmd("piqi --version"), %% returned by piqi > 0.6.5
-    StrVsn = case VsnOld of
-        "0." ++ _ -> VsnOld;
-        _ -> VsnNew
-    end,
-    MinVersionStr = "0.6.0",
-    Vsn = parse_vsn(StrVsn),
-    case (Vsn >= parse_vsn(MinVersionStr)) of
-        true->
-            "piqi";
-        false ->
-            erlang:error("Piqi " ++ string:strip(StrVsn, right, $\n) ++
-                         " incompatible. Need >= " ++ MinVersionStr)
+    Err = "piqi binary not available",
+    case code:priv_dir(piqi_bin) of
+        {error, _} ->
+            erlang:error(Err);
+        Path ->
+            FullPath = filename:join(Path, "piqi"),
+            case filelib:is_regular(FullPath) of
+                true ->
+                    FullPath;
+                false ->
+                    erlang:error(Err)
+            end
     end.
-
-parse_vsn(StringVsn) ->
-     try
-         [A, B, C | _] = string:tokens(StringVsn, "."),
-         V = lists:map(fun string:to_integer/1, [A, B, C]),
-         list_to_tuple([Int || {Int, _} <- V])
-     catch
-         _:_ ->
-             erlang:error("Error parsing piqi version: " ++ StringVsn)
-     end.
-
 
 throw_error(X) -> throw({error, X}).
 

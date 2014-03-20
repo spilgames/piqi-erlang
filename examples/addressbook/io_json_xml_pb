@@ -8,7 +8,7 @@ fi
 
 
 RUN="io_json_xml_pb run"
-ERL_PATH="-pa ebin -pa deps/piqi/ebin"
+ERL_PATH="-pa ebin -pa deps/*/ebin"
 
 
 erl $ERL_PATH -noshell -s piqi start -run $RUN "$1" -s erlang halt
