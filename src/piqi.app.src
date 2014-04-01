@@ -3,7 +3,7 @@
     {vsn, git},
     {modules, []},
     {registered, [piqi_tools, piqi_sup]},
-    {applications, [kernel, stdlib]},
+    {applications, [kernel, stdlib, piqi_bin]},
     {mod, {piqi_app, []}},
     {env, [
         % The number of "piqi server" instances that perform "convert" and other
